@@ -7,13 +7,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#FFFFFF">
+
+        <!-- Barra azul superior -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="#1976D2"
+            android:text="@string/contactos"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"/>
+
+        <!-- Lista de contactos -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewContacts"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/contact_item" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
