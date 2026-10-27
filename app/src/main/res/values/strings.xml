@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MiniAgenda</string>
     <string name="contactos">Contactos</string>
+    <string name="addcontactbutton">addContactButton</string>
 </resources>
