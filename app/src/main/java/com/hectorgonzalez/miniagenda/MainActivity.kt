@@ -1,6 +1,12 @@
 package com.hectorgonzalez.miniagenda
 
+import android.app.AlertDialog
 import android.os.Bundle
+import android.text.InputType
+import android.util.Patterns
+import android.view.View
+import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -27,6 +33,8 @@ class MainActivity : AppCompatActivity() {
 
     private val contacts = ArrayList<Contact>()
 
+    private lateinit var contactAdapter: ContactAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -50,8 +58,57 @@ class MainActivity : AppCompatActivity() {
             contacts.add(randomContact)
         }
 
-        val contactAdapter = ContactAdapter(contacts)
+        contactAdapter = ContactAdapter(contacts)
         val recyclerView: RecyclerView = findViewById(R.id.recyclerViewContacts)
         recyclerView.adapter = contactAdapter
+
+        val addContactButton: View = findViewById(R.id.addContactButton)
+        addContactButton.setOnClickListener {
+            showAddContactDialog()
+        }
+    }
+
+    private fun showAddContactDialog() {
+        val nameInput = EditText(this)
+        nameInput.hint = "Nombre"
+
+        val phoneInput = EditText(this)
+        phoneInput.hint = "Teléfono"
+        phoneInput.inputType = InputType.TYPE_CLASS_PHONE
+
+        val layout = LinearLayout(this)
+        layout.orientation = LinearLayout.VERTICAL
+        layout.addView(nameInput)
+        layout.addView(phoneInput)
+
+        val builder = AlertDialog.Builder(this)
+            .setTitle("Añadir contacto")
+            .setView(layout)
+            .setPositiveButton("Confirmar") { _, _ -> }
+            .setNegativeButton("Cancelar") { _, _ -> }
+
+        val dialog = builder.show()
+
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+            val name = nameInput.text.toString().trim()
+            val phone = phoneInput.text.toString().trim()
+
+            var valid = true
+
+            if (name.isEmpty()) {
+                nameInput.error = "Introduce un nombre"
+                valid = false
+            }
+            if (phone.isEmpty() || !Patterns.PHONE.matcher(phone).matches()) {
+                phoneInput.error = "Introduce un número válido"
+                valid = false
+            }
+
+            if (valid) {
+                contacts.add(Contact(name, phone))
+                contactAdapter.notifyItemInserted(contacts.size - 1)
+                dialog.dismiss()
+            }
+        }
     }
 }

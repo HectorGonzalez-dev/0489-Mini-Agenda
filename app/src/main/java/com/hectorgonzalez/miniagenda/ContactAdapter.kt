@@ -37,6 +37,7 @@ class ContactAdapter(private val dataSet: List<Contact>) :
 
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        viewHolder.itemView.setBackgroundColor(android.graphics.Color.WHITE)
 
         val contactColors = listOf(
             R.color.contact_blue,
