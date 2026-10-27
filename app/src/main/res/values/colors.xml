@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="contact_blue">#1976D2</color>
+    <color name="contact_green">#388E3C</color>
+    <color name="contact_purple">#7B1FA2</color>
+    <color name="contact_orange">#F57C00</color>
+    <color name="contact_red">#D32F2F</color>
+    <color name="contact_teal">#00796B</color>
+    <color name="contact_pink">#C2185B</color>
 </resources>
