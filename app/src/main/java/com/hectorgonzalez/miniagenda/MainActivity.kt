@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,5 +49,9 @@ class MainActivity : AppCompatActivity() {
             val randomContact = Contact(randomFullName, randomPhoneNumber.toString())
             contacts.add(randomContact)
         }
+
+        val contactAdapter = ContactAdapter(contacts)
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerViewContacts)
+        recyclerView.adapter = contactAdapter
     }
 }
